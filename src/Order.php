@@ -18,7 +18,7 @@ class Order
         array_push($this->items, $item);
     }
 
-    public function getSubTotal()
+    public function getSubTotal(): float
     {
         return array_reduce(
             array: $this->items,
@@ -29,5 +29,23 @@ class Order
             },
             initial: 0
         );
+    }
+
+    public function getTaxes(): float
+    {
+        return array_reduce(
+            array: $this->items,
+            callback: function (float $taxes,Item $item) {
+                $taxes += $item->calculateTaxes();
+
+                return $taxes;
+            },
+            initial: 0
+        );
+    }
+
+    public function getTotal(): float
+    {
+        return $this->getSubTotal() + $this->getTaxes();
     }
 }
