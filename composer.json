@@ -1,0 +1,19 @@
+{
+  "authors": [
+    {
+    "email": "lucasgioricesconetto@gmail.com",
+    "name": "Lucas Giori Cesconetto"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\":"src/"
+    }
+  },
+  "require": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
+}
