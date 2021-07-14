@@ -10,9 +10,4 @@ class Water extends Item
     {
         parent::__construct(category: "Water",description: $description,price: $price);
     }
-
-    public function getTax(): float
-    {
-        return 0;
-    }
 }

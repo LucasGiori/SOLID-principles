@@ -2,6 +2,8 @@
 
 namespace App;
 
+use DateTime;
+
 class Order
 {
     public string $code;
@@ -31,12 +33,14 @@ class Order
         );
     }
 
-    public function getTaxes(): float
+    public function getTaxes(DateTime $date): float
     {
         return array_reduce(
             array: $this->items,
-            callback: function (float $taxes,Item $item) {
-                $taxes += $item->calculateTaxes();
+            callback: function (float $taxes,Item $item) use ($date) {
+                if($item instanceof TaxItem) {
+                    $taxes += $item->calculateTaxes(date: $date);
+                }
 
                 return $taxes;
             },
@@ -44,8 +48,8 @@ class Order
         );
     }
 
-    public function getTotal(): float
+    public function getTotal(DateTime $date): float
     {
-        return $this->getSubTotal() + $this->getTaxes();
+        return $this->getSubTotal() + $this->getTaxes(date: $date);
     }
 }

@@ -9,11 +9,4 @@ abstract class Item
         public string $description,
         public float $price
     ){}
-
-    public function calculateTaxes(): float
-    {
-        return $this->price * $this->getTax();
-    }
-
-    public abstract function getTax(): float;
 }
